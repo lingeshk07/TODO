@@ -1,57 +1,16 @@
-### Installation
+# React + Vite
 
-- [Docker](https://docs.docker.com/engine/install/)
-- [Mysqlsh](https://dev.mysql.com/doc/mysql-shell/8.0/en/mysql-shell-install.html)
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-### Launch MySQL using Docker
+Currently, two official plugins are available:
 
-```
-docker run --detach --env MYSQL_ROOT_PASSWORD=dummypassword --env MYSQL_USER=todos-user --env MYSQL_PASSWORD=dummytodos --env MYSQL_DATABASE=todos --name mysql --publish 3306:3306 mysql:8-oracle
-```
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-### /pom.xml Modified
+## React Compiler
 
-```
-<!-- Remove H2
-	<dependency>
-		<groupId>com.h2database</groupId>
-		<artifactId>h2</artifactId>
-		<scope>runtime</scope>
-	</dependency> -->
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-// Deprecated in SB 3.1.x
-<!--<dependency>
-	<groupId>mysql</groupId>
-	<artifactId>mysql-connector-java</artifactId>
-</dependency> -->
+## Expanding the ESLint configuration
 
-// Use the below Mysql Dependency Starting from SB 3.1.x
-<dependency>
-	<groupId>com.mysql</groupId>
-	<artifactId>mysql-connector-j</artifactId>
-</dependency>
-```
-### pom.xml - New
-
-- To view the H2 console in the web browser, you need to manually add the following dependency to the `pom.xml` file.
-
-```xml
-<dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-h2console</artifactId>
-</dependency>
-```
-
-### /src/main/resources/application.properties Modified
-
-```
-
-#comment-h2
-#spring.datasource.url=jdbc:h2:mem:testdb
-
-spring.datasource.url=jdbc:mysql://localhost:3306/todos
-spring.datasource.username=todos-user
-spring.datasource.password=dummytodos
-spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL8Dialect
-spring.jpa.hibernate.ddl-auto=update
-```
+If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
